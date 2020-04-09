@@ -1,7 +1,7 @@
 const currentlyInfectedImpact = (data) => data.reportedCases * 10;
 
 const infectionsByRequestedTimeImpact = (data) => {
-  let result;
+  let result=0;
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
     result = currentlyInfectedImpact(data) * 2 ** days;
@@ -12,7 +12,7 @@ const infectionsByRequestedTimeImpact = (data) => {
     const days = Math.floor((data.timeToElapse * 30) / 3);
     result = currentlyInfectedImpact(data) * 2 ** days;
   }
-  return parseInt(result);
+  return result;
 };
 
 const severeCasesByRequestedTimeImpact = (data) => infectionsByRequestedTimeImpact(data) * 0.15;
@@ -20,7 +20,7 @@ const severeCasesByRequestedTimeImpact = (data) => infectionsByRequestedTimeImpa
 const currentlyInfectedSevere = (data) => data.reportedCases * 50;
 
 const infectionsByRequestedTimeSevere = (data) => {
-  let result;
+  let result=0;
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
     result = currentlyInfectedSevere(data) * 2 ** days;
@@ -31,7 +31,7 @@ const infectionsByRequestedTimeSevere = (data) => {
     const days = Math.floor((data.timeToElapse * 30) / 3);
     result = currentlyInfectedSevere(data) * 2 ** days;
   }
-  return parseInt(result);
+  return result;
 };
 
 const severeCasesByRequestedTimeSevere = (data) => infectionsByRequestedTimeSevere(data) * 0.15;
