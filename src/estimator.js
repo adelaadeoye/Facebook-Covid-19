@@ -5,9 +5,9 @@ const infectionsByRequestedTimeImpact = (data) => {
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
     result = currentlyInfectedImpact(data) * 2 ** days;
-  } else if (data.periodTyp === 'weeks') {
-    const days = (data.timeToElapse * 7) / 3;
-    result = currentlyInfectedImpact(data) * 2 ** Math.floor(days);
+  } else if (data.periodType === 'weeks') {
+    const days = Math.floor((data.timeToElapse * 7) / 3);
+    result = currentlyInfectedImpact(data) * 2 ** days;
   } else {
     const days = Math.floor((data.timeToElapse * 30) / 3);
     result = currentlyInfectedImpact(data) * 2 ** days;
@@ -24,9 +24,9 @@ const infectionsByRequestedTimeSevere = (data) => {
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
     result = currentlyInfectedSevere(data) * 2 ** days;
-  } else if (data.periodTyp === 'weeks') {
-    const days = (data.timeToElapse * 7) / 3;
-    result = currentlyInfectedSevere(data) * 2 ** Math.floor(days);
+  } else if (data.periodType === 'weeks') {
+    const days = Math.floor((data.timeToElapse * 7) / 3);
+    result = currentlyInfectedSevere(data) * 2 ** days;
   } else {
     const days = Math.floor((data.timeToElapse * 30) / 3);
     result = currentlyInfectedSevere(data) * 2 ** days;
@@ -58,8 +58,8 @@ const covid19ImpactEstimator = (data) => {
 //     avgDailyIncomeInUSD: 5,
 //     avgDailyIncomePopulation: 0.71
 //   },
-//   periodType: 'days',
-//   timeToElapse: 58,
+//   periodType: 'weeks',
+//   timeToElapse: 2,
 //   reportedCases: 674,
 //   population: 66622705,
 //   totalHospitalBeds: 1380614
