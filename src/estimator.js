@@ -12,7 +12,7 @@ const infectionsByRequestedTimeImpact = (data) => {
     const days = Math.floor((data.timeToElapse * 30) / 3);
     result = currentlyInfectedImpact(data) * 2 ** days;
   }
-  return result;
+  return parseInt(result);
 };
 
 const severeCasesByRequestedTimeImpact = (data) => infectionsByRequestedTimeImpact(data) * 0.15;
@@ -31,7 +31,7 @@ const infectionsByRequestedTimeSevere = (data) => {
     const days = Math.floor((data.timeToElapse * 30) / 3);
     result = currentlyInfectedSevere(data) * 2 ** days;
   }
-  return result;
+  return parseInt(result);
 };
 
 const severeCasesByRequestedTimeSevere = (data) => infectionsByRequestedTimeSevere(data) * 0.15;
