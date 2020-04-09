@@ -9,10 +9,9 @@ const infectionsByRequestedTimeImpact = (period, time) => {
   } else if (period === 'weeks') {
     const days = Math.floor((time * 7) / 3);
     return currentlyInfectedImpact(reported) * 2 ** days;
-  } 
-    const days = Math.floor((time * 30) / 3);
-    return currentlyInfectedImpact(reported) * 2 ** days;
-  
+  }
+  const days = Math.floor((time * 30) / 3);
+  return currentlyInfectedImpact(reported) * 2 ** days;
 };
 
 const severeCasesByRequestedTimeImpact = (period, time) => {
@@ -29,18 +28,18 @@ const infectionsByRequestedTimeSevere = (period, time) => {
   } else if (period === 'weeks') {
     const days = Math.floor((time * 7) / 3);
     return currentlyInfectedSevere(reported) * 2 ** days;
-  } 
-    const days = Math.floor((time * 30) / 3);
-    return currentlyInfectedSevere(reported) * 2 ** days;
-  
+  }
+  const days = Math.floor((time * 30) / 3);
+  return currentlyInfectedSevere(reported) * 2 ** days;
 };
 const severeCasesByRequestedTimeSever = (period, time) => {
   return infectionsByRequestedTimeSevere(period, time) * 0.15;
 };
+
 const covid19ImpactEstimator = (data) => {
-  const reported = data.reportedCases;
-  const period = data.periodType;
-  const time = data.timeToElapse;
+  reported = data.reportedCases;
+  period = data.periodType;
+  time = data.timeToElapse;
   const impactEstimation = {
     data: data,
     impact: {
@@ -57,5 +56,4 @@ const covid19ImpactEstimator = (data) => {
 
   return impactEstimation;
 };
-
 export default covid19ImpactEstimator;
