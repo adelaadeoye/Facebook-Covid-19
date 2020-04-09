@@ -1,7 +1,7 @@
 const currentlyInfectedImpact = (data) => data.reportedCases * 10;
 
 const infectionsByRequestedTimeImpact = (data) => {
-  let result = '';
+  let result;
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
     result = currentlyInfectedImpact(data) * 2 ** days;
@@ -20,7 +20,7 @@ const severeCasesByRequestedTimeImpact = (data) => infectionsByRequestedTimeImpa
 const currentlyInfectedSevere = (data) => data.reportedCases * 50;
 
 const infectionsByRequestedTimeSevere = (data) => {
-  let result = '';
+  let result;
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
     result = currentlyInfectedSevere(data) * 2 ** days;
