@@ -1,6 +1,4 @@
-const currentlyInfectedImpact = (data) => {
-  return data.reportedCases * 10;
-};
+const currentlyInfectedImpact = (data) => data.reportedCases * 10;
 
 const infectionsByRequestedTimeImpact = (data) => {
   let result = '';
@@ -17,13 +15,10 @@ const infectionsByRequestedTimeImpact = (data) => {
   return result;
 };
 
-const severeCasesByRequestedTimeImpact = (data) => {
-  return infectionsByRequestedTimeImpact(data) * 0.15;
-};
+const severeCasesByRequestedTimeImpact = (data) =>
+  infectionsByRequestedTimeImpact(data) * 0.15;
 
-const currentlyInfectedSevere = (data) => {
-  return data.reportedCases * 50;
-};
+const currentlyInfectedSevere = (data) => data.reportedCases * 50;
 
 const infectionsByRequestedTimeSevere = (data) => {
   let result = '';
@@ -40,9 +35,9 @@ const infectionsByRequestedTimeSevere = (data) => {
   return result;
 };
 
-const severeCasesByRequestedTimeSevere = (data) => {
-  return infectionsByRequestedTimeSevere(data) * 0.15;
-};
+const severeCasesByRequestedTimeSevere = (data) =>
+  infectionsByRequestedTimeSevere(data) * 0.15;
+
 const covid19ImpactEstimator = (data) => {
   const impactEstimation = {};
   impactEstimation.data = data;
