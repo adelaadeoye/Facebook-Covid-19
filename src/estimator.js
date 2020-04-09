@@ -17,6 +17,12 @@ const infectionsByRequestedTimeImpact = (data) => {
 
 const severeCasesByRequestedTimeImpact = (data) => infectionsByRequestedTimeImpact(data) * 0.15;
 
+const hospitalBedsByRequestedTimeImpact = (data) => {
+  const severCases = severeCasesByRequestedTimeImpact(data);
+  const availableBeds = 0.35 * data.totalHospitalBeds - severCases;
+  return availableBeds;
+};
+
 const currentlyInfectedSevere = (data) => data.reportedCases * 50;
 
 const infectionsByRequestedTimeSevere = (data) => {
@@ -36,18 +42,25 @@ const infectionsByRequestedTimeSevere = (data) => {
 
 const severeCasesByRequestedTimeSevere = (data) => infectionsByRequestedTimeSevere(data) * 0.15;
 
+const hospitalBedsByRequestedTimeSevere = (data) => {
+  const severCases = severeCasesByRequestedTimeSevere(data);
+  const availableBeds = 0.35 * data.totalHospitalBeds - severCases;
+  return availableBeds;
+};
 const covid19ImpactEstimator = (data) => {
   const impactEstimation = {};
   impactEstimation.data = data;
   impactEstimation.impact = {
     currentlyInfected: currentlyInfectedImpact(data),
     infectionsByRequestedTime: infectionsByRequestedTimeImpact(data),
-    severeCasesByRequestedTime: severeCasesByRequestedTimeImpact(data)
+    severeCasesByRequestedTime: severeCasesByRequestedTimeImpact(data),
+    hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact(data)
   };
   impactEstimation.severeImpact = {
     currentlyInfected: currentlyInfectedSevere(data),
     infectionsByRequestedTime: infectionsByRequestedTimeSevere(data),
-    severeCasesByRequestedTime: severeCasesByRequestedTimeSevere(data)
+    severeCasesByRequestedTime: severeCasesByRequestedTimeSevere(data),
+    hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere(data)
   };
   return impactEstimation;
 };
@@ -58,7 +71,7 @@ const covid19ImpactEstimator = (data) => {
 //     avgDailyIncomeInUSD: 5,
 //     avgDailyIncomePopulation: 0.71
 //   },
-//   periodType: 'weeks',
+//   periodType: 'months',
 //   timeToElapse: 2,
 //   reportedCases: 674,
 //   population: 66622705,
