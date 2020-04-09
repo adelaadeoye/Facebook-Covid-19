@@ -19,7 +19,7 @@ const severeCasesByRequestedTimeImpact = (data) => infectionsByRequestedTimeImpa
 
 const hospitalBedsByRequestedTimeImpact = (data) => {
   const severCases = severeCasesByRequestedTimeImpact(data);
-  let availableBeds = 0.35 * data.totalHospitalBeds - severCases;
+  const availableBeds = 0.35 * data.totalHospitalBeds - severCases;
   if (Number.isInteger(availableBeds)) return availableBeds;
   return Math.floor(availableBeds) + 1;
 };
