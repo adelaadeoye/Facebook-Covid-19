@@ -5,8 +5,8 @@ const infectionsByRequestedTimeImpact = (data) => {
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
     result = currentlyInfectedImpact(data) * 2 ** days;
-  }else if (data.periodTyp === 'weeks') {
-    const days =(data.timeToElapse * 7) / 3;
+  } else if (data.periodTyp === 'weeks') {
+    const days = (data.timeToElapse * 7) / 3;
     result = currentlyInfectedImpact(data) * 2 ** Math.floor(days);
   } else {
     const days = Math.floor((data.timeToElapse * 30) / 3);
@@ -25,7 +25,7 @@ const infectionsByRequestedTimeSevere = (data) => {
     const days = Math.floor(data.timeToElapse / 3);
     result = currentlyInfectedSevere(data) * 2 ** days;
   } else if (data.periodTyp === 'weeks') {
-    const days =(data.timeToElapse * 7) / 3;
+    const days = (data.timeToElapse * 7) / 3;
     result = currentlyInfectedSevere(data) * 2 ** Math.floor(days);
   } else {
     const days = Math.floor((data.timeToElapse * 30) / 3);
