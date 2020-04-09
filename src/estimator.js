@@ -1,7 +1,7 @@
 const covid19ImpactEstimator = (data) => {
-  reported = data.reportedCases;
-  period = data.periodType;
-  time = data.timeToElapse;
+  const reported = data.reportedCases;
+  const period = data.periodType;
+  const time = data.timeToElapse;
   const impactEstimation = {
     data: data,
     impact: {
