@@ -39,7 +39,7 @@ const severeCasesByRequestedTimeSevere = (data) => {
 };
 const covid19ImpactEstimator = (data) => {
   const impactEstimation = {};
-  impactEstimation.data=data
+  impactEstimation.data = data;
   impactEstimation.impact = {
     currentlyInfected: currentlyInfectedImpact(data),
     infectionsByRequestedTime: infectionsByRequestedTimeImpact(data),
@@ -50,7 +50,7 @@ const covid19ImpactEstimator = (data) => {
     infectionsByRequestedTime: infectionsByRequestedTimeSevere(data),
     severeCasesByRequestedTime: severeCasesByRequestedTimeSevere(data)
   };
-  return impactEstimation
+  return impactEstimation;
 };
 // data={
 //     region: {
