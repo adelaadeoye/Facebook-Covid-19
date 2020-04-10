@@ -21,7 +21,7 @@ const hospitalBedsByRequestedTimeImpact = (data) => {
   const severCases = severeCasesByRequestedTimeImpact(data);
   const availableBeds = 0.35 * data.totalHospitalBeds - severCases;
   if (Number.isInteger(availableBeds)) return availableBeds;
-  return Math.floor(availableBeds) + 1;
+  return Math.round(availableBeds);
 };
 
 const casesForICUByRequestedTimeImpact = (data) => {
@@ -73,7 +73,7 @@ const hospitalBedsByRequestedTimeSevere = (data) => {
   const severCases = severeCasesByRequestedTimeSevere(data);
   const availableBeds = 0.35 * data.totalHospitalBeds - severCases;
   if (Number.isInteger(availableBeds)) return availableBeds;
-  return Math.floor(availableBeds) + 1;
+  return Math.round(availableBeds);
 };
 
 const casesForICUByRequestedTimeSevere = (data) => {
