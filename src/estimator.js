@@ -26,32 +26,26 @@ const hospitalBedsByRequestedTimeImpact = (data) => {
 
 const casesForICUByRequestedTimeImpact = (data) => Math.floor(infectionsByRequestedTimeImpact(data) * 0.05);
 
-const casesForVentilatorsByRequestedTimeImpact = (data) =>
-  Math.floor(infectionsByRequestedTimeImpact(data) * 0.02);
+const casesForVentilatorsByRequestedTimeImpact = (data) => Math.floor(infectionsByRequestedTimeImpact(data) * 0.02);
 
 const dollarsInFlightImpact = (data) => {
   let result = 0;
+  const pop = data.region.avgDailyIncomePopulation;
+  const income = region.avgDailyIncomeInUSD;
+  const infected = infectionsByRequestedTimeImpact(data);
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
-    result =
-      infectionsByRequestedTimeImpact(data) *
+    result = infected * pop * income * days;
+    infectionsByRequestedTimeImpact(data) *
       data.region.avgDailyIncomePopulation *
       data.region.avgDailyIncomeInUSD *
       days;
   } else if (data.periodType === 'weeks') {
     const days = Math.floor((data.timeToElapse * 7) / 3);
-    result =
-      infectionsByRequestedTimeImpact(data) *
-      data.region.avgDailyIncomePopulation *
-      data.region.avgDailyIncomeInUSD *
-      days;
+    result = infected * pop * income * days;
   } else {
     const days = Math.floor((data.timeToElapse * 30) / 3);
-    result =
-      infectionsByRequestedTimeImpact(data) *
-      data.region.avgDailyIncomePopulation *
-      data.region.avgDailyIncomeInUSD *
-      days;
+    result = infected * pop * income * days;
   }
   return result;
 };
@@ -82,35 +76,24 @@ const hospitalBedsByRequestedTimeSevere = (data) => {
   return Math.floor(availableBeds) + 1;
 };
 
-const casesForICUByRequestedTimeSevere = (data) =>
-  Math.floor(infectionsByRequestedTimeSevere(data) * 0.05);
+const casesForICUByRequestedTimeSevere = (data) => Math.floor(infectionsByRequestedTimeSevere(data) * 0.05);
 
-const casesForVentilatorsByRequestedTimeSevere = (data) =>
-  Math.floor(infectionsByRequestedTimeSevere(data) * 0.02);
+const casesForVentilatorsByRequestedTimeSevere = (data) => Math.floor(infectionsByRequestedTimeSevere(data) * 0.02);
 
 const dollarsInFlightSevere = (data) => {
   let result = 0;
+  const pop = data.region.avgDailyIncomePopulation;
+  const income = region.avgDailyIncomeInUSD;
+  const infected = infectionsByRequestedTimeSevere(data);
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
-    result =
-      infectionsByRequestedTimeSevere(data) *
-      data.region.avgDailyIncomePopulation *
-      data.region.avgDailyIncomeInUSD *
-      days;
+    result = infected * pop * income * days;
   } else if (data.periodType === 'weeks') {
     const days = Math.floor((data.timeToElapse * 7) / 3);
-    result =
-      infectionsByRequestedTimeSevere(data) *
-      data.region.avgDailyIncomePopulation *
-      data.region.avgDailyIncomeInUSD *
-      days;
+    result = infected * pop * income * days;
   } else {
     const days = Math.floor((data.timeToElapse * 30) / 3);
-    result =
-      infectionsByRequestedTimeSevere(data) *
-      data.region.avgDailyIncomePopulation *
-      data.region.avgDailyIncomeInUSD *
-      days;
+    result = infected * pop * income * days;
   }
   return result;
 };
