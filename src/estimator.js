@@ -32,23 +32,6 @@ const casesForVentilatorsByRequestedTimeImpact = (data) => {
   const infected = infectionsByRequestedTimeImpact(data);
   return Math.trunc(infected * 0.02);
 };
-const dollarsInFlightImpact = (data) => {
-  let result = 0;
-  const pop = data.region.avgDailyIncomePopulation;
-  const income = data.region.avgDailyIncomeInUSD;
-  const infected = infectionsByRequestedTimeImpact(data);
-  if (data.periodType === 'days') {
-    const days = Math.floor(data.timeToElapse / 3);
-    result = (infected * pop * income) / days;
-  } else if (data.periodType === 'weeks') {
-    const days = Math.floor((data.timeToElapse * 7) / 3);
-    result = (infected * pop * income) / days;
-  } else {
-    const days = Math.floor((data.timeToElapse * 30) / 3);
-    result = (infected * pop * income) / days;
-  }
-  return result;
-};
 
 const currentlyInfectedSevere = (data) => data.reportedCases * 50;
 
@@ -84,23 +67,6 @@ const casesForVentilatorsByRequestedTimeSevere = (data) => {
   const infected = infectionsByRequestedTimeSevere(data);
   return Math.trunc(infected * 0.02);
 };
-const dollarsInFlightSevere = (data) => {
-  let result = 0;
-  const pop = data.region.avgDailyIncomePopulation;
-  const income = data.region.avgDailyIncomeInUSD;
-  const infected = infectionsByRequestedTimeSevere(data);
-  if (data.periodType === 'days') {
-    const days = Math.floor(data.timeToElapse / 3);
-    result = (infected * pop * income) / days;
-  } else if (data.periodType === 'weeks') {
-    const days = Math.floor((data.timeToElapse * 7) / 3);
-    result = (infected * pop * income) / days;
-  } else {
-    const days = Math.floor((data.timeToElapse * 30) / 3);
-    result = (infected * pop * income) / days;
-  }
-  return result;
-};
 
 const covid19ImpactEstimator = (data) => {
   const impactEstimation = {};
@@ -113,7 +79,7 @@ const covid19ImpactEstimator = (data) => {
     casesForICUByRequestedTime: casesForICUByRequestedTimeImpact(data),
     casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeImpact(
       data
-    ),
+    )
   };
   impactEstimation.severeImpact = {
     currentlyInfected: currentlyInfectedSevere(data),
@@ -123,7 +89,7 @@ const covid19ImpactEstimator = (data) => {
     casesForICUByRequestedTime: casesForICUByRequestedTimeSevere(data),
     casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevere(
       data
-    ),
+    )
   };
   return impactEstimation;
 };
