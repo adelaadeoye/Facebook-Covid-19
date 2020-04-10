@@ -39,13 +39,13 @@ const dollarsInFlightImpact = (data) => {
   const infected = infectionsByRequestedTimeImpact(data);
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
-    result = infected * pop * income * days;
+    result = (infected * pop * income) / days;
   } else if (data.periodType === 'weeks') {
     const days = Math.floor((data.timeToElapse * 7) / 3);
-    result = infected * pop * income * days;
+    result = (infected * pop * income) / days;
   } else {
     const days = Math.floor((data.timeToElapse * 30) / 3);
-    result = infected * pop * income * days;
+    result = (infected * pop * income) / days;
   }
   return result;
 };
@@ -91,13 +91,13 @@ const dollarsInFlightSevere = (data) => {
   const infected = infectionsByRequestedTimeSevere(data);
   if (data.periodType === 'days') {
     const days = Math.floor(data.timeToElapse / 3);
-    result = infected * pop * income * days;
+    result = (infected * pop * income) / days;
   } else if (data.periodType === 'weeks') {
     const days = Math.floor((data.timeToElapse * 7) / 3);
-    result = infected * pop * income * days;
+    result = (infected * pop * income) / days;
   } else {
     const days = Math.floor((data.timeToElapse * 30) / 3);
-    result = infected * pop * income * days;
+    result = (infected * pop * income) / days;
   }
   return result;
 };
