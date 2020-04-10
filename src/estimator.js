@@ -38,14 +38,14 @@ const dollarsInFlightImpact = (data) => {
   const income = data.region.avgDailyIncomeInUSD;
   const infected = infectionsByRequestedTimeImpact(data);
   if (data.periodType === 'days') {
-    const days = Math.floor(data.timeToElapse / 3);
-    result = (infected * pop * income) / days;
+    const days = data.timeToElapse;
+    result = Math.floor((infected * pop * income) / days);
   } else if (data.periodType === 'weeks') {
-    const days = Math.floor((data.timeToElapse * 7) / 3);
-    result = (infected * pop * income) / days;
+    const days = (data.timeToElapse * 7);
+    result = Math.floor((infected * pop * income) / days);
   } else {
-    const days = Math.floor((data.timeToElapse * 30) / 3);
-    result = (infected * pop * income) / days;
+    const days = (data.timeToElapse * 30);
+    result = Math.floor((infected * pop * income) / days);
   }
   return result;
 };
@@ -90,14 +90,14 @@ const dollarsInFlightSevere = (data) => {
   const income = data.region.avgDailyIncomeInUSD;
   const infected = infectionsByRequestedTimeSevere(data);
   if (data.periodType === 'days') {
-    const days = Math.floor(data.timeToElapse / 3);
-    result = (infected * pop * income) / days;
+    const days = data.timeToElapse;
+    result = Math.floor((infected * pop * income) / days);
   } else if (data.periodType === 'weeks') {
-    const days = Math.floor((data.timeToElapse * 7) / 3);
-    result = (infected * pop * income) / days;
+    const days = (data.timeToElapse * 7);
+    result = Math.floor((infected * pop * income) / days);
   } else {
-    const days = Math.floor((data.timeToElapse * 30) / 3);
-    result = (infected * pop * income) / days;
+    const days = (data.timeToElapse * 30);
+    result = Math.floor((infected * pop * income) / days);
   }
   return result;
 };
@@ -129,18 +129,18 @@ const covid19ImpactEstimator = (data) => {
   };
   return impactEstimation;
 };
-// data = {
-//   region: {
-//     name: 'Africa',
-//     avgAge: 19.7,
-//     avgDailyIncomeInUSD: 5,
-//     avgDailyIncomePopulation: 0.71
-//   },
-//   periodType: 'days',
-//   timeToElapse: 58,
-//   reportedCases: 674,
-//   population: 66622705,
-//   totalHospitalBeds: 1380614
-// };
-// console.log(covid19ImpactEstimator(data));
-export default covid19ImpactEstimator;
+data = {
+  region: {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
+  },
+  periodType: 'months',
+  timeToElapse: 2,
+  reportedCases: 674,
+  population: 66622705,
+  totalHospitalBeds: 1380614
+};
+console.log(covid19ImpactEstimator(data));
+// export default covid19ImpactEstimator;
