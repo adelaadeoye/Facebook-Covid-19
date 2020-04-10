@@ -26,11 +26,11 @@ const hospitalBedsByRequestedTimeImpact = (data) => {
 
 const casesForICUByRequestedTimeImpact = (data) => {
   const infected = infectionsByRequestedTimeImpact(data);
-  return Math.floor(infected * 0.05);
+  return Math.round(infected * 0.05);
 };
 const casesForVentilatorsByRequestedTimeImpact = (data) => {
   const infected = infectionsByRequestedTimeImpact(data);
-  return Math.floor(infected * 0.02);
+  return Math.trunc(infected * 0.02);
 };
 const dollarsInFlightImpact = (data) => {
   let result = 0;
@@ -78,11 +78,11 @@ const hospitalBedsByRequestedTimeSevere = (data) => {
 
 const casesForICUByRequestedTimeSevere = (data) => {
   const infected = infectionsByRequestedTimeSevere(data);
-  return Math.floor(infected * 0.05);
+  return Math.round(infected * 0.05);
 };
 const casesForVentilatorsByRequestedTimeSevere = (data) => {
   const infected = infectionsByRequestedTimeSevere(data);
-  return Math.floor(infected * 0.02);
+  return Math.trunc(infected * 0.02);
 };
 const dollarsInFlightSevere = (data) => {
   let result = 0;
