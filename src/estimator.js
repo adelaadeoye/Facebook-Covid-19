@@ -24,6 +24,38 @@ const hospitalBedsByRequestedTimeImpact = (data) => {
   return Math.floor(availableBeds) + 1;
 };
 
+const casesForICUByRequestedTimeImpact = (data) => Math.floor(infectionsByRequestedTimeImpact(data) * 0.05);
+
+const casesForVentilatorsByRequestedTimeImpact = (data) =>
+  Math.floor(infectionsByRequestedTimeImpact(data) * 0.02);
+
+const dollarsInFlightImpact = (data) => {
+  let result = 0;
+  if (data.periodType === 'days') {
+    const days = Math.floor(data.timeToElapse / 3);
+    result =
+      infectionsByRequestedTimeImpact(data) *
+      data.region.avgDailyIncomePopulation *
+      data.region.avgDailyIncomeInUSD *
+      days;
+  } else if (data.periodType === 'weeks') {
+    const days = Math.floor((data.timeToElapse * 7) / 3);
+    result =
+      infectionsByRequestedTimeImpact(data) *
+      data.region.avgDailyIncomePopulation *
+      data.region.avgDailyIncomeInUSD *
+      days;
+  } else {
+    const days = Math.floor((data.timeToElapse * 30) / 3);
+    result =
+      infectionsByRequestedTimeImpact(data) *
+      data.region.avgDailyIncomePopulation *
+      data.region.avgDailyIncomeInUSD *
+      days;
+  }
+  return result;
+};
+
 const currentlyInfectedSevere = (data) => data.reportedCases * 50;
 
 const infectionsByRequestedTimeSevere = (data) => {
@@ -49,6 +81,40 @@ const hospitalBedsByRequestedTimeSevere = (data) => {
   if (Number.isInteger(availableBeds)) return availableBeds;
   return Math.floor(availableBeds) + 1;
 };
+
+const casesForICUByRequestedTimeSevere = (data) =>
+  Math.floor(infectionsByRequestedTimeSevere(data) * 0.05);
+
+const casesForVentilatorsByRequestedTimeSevere = (data) =>
+  Math.floor(infectionsByRequestedTimeSevere(data) * 0.02);
+
+const dollarsInFlightSevere = (data) => {
+  let result = 0;
+  if (data.periodType === 'days') {
+    const days = Math.floor(data.timeToElapse / 3);
+    result =
+      infectionsByRequestedTimeSevere(data) *
+      data.region.avgDailyIncomePopulation *
+      data.region.avgDailyIncomeInUSD *
+      days;
+  } else if (data.periodType === 'weeks') {
+    const days = Math.floor((data.timeToElapse * 7) / 3);
+    result =
+      infectionsByRequestedTimeSevere(data) *
+      data.region.avgDailyIncomePopulation *
+      data.region.avgDailyIncomeInUSD *
+      days;
+  } else {
+    const days = Math.floor((data.timeToElapse * 30) / 3);
+    result =
+      infectionsByRequestedTimeSevere(data) *
+      data.region.avgDailyIncomePopulation *
+      data.region.avgDailyIncomeInUSD *
+      days;
+  }
+  return result;
+};
+
 const covid19ImpactEstimator = (data) => {
   const impactEstimation = {};
   impactEstimation.data = data;
@@ -56,13 +122,23 @@ const covid19ImpactEstimator = (data) => {
     currentlyInfected: currentlyInfectedImpact(data),
     infectionsByRequestedTime: infectionsByRequestedTimeImpact(data),
     severeCasesByRequestedTime: severeCasesByRequestedTimeImpact(data),
-    hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact(data)
+    hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeImpact(data),
+    casesForICUByRequestedTime: casesForICUByRequestedTimeImpact(data),
+    casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeImpact(
+      data
+    ),
+    dollarsInFlight: dollarsInFlightImpact(data)
   };
   impactEstimation.severeImpact = {
     currentlyInfected: currentlyInfectedSevere(data),
     infectionsByRequestedTime: infectionsByRequestedTimeSevere(data),
     severeCasesByRequestedTime: severeCasesByRequestedTimeSevere(data),
-    hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere(data)
+    hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere(data),
+    casesForICUByRequestedTime: casesForICUByRequestedTimeSevere(data),
+    casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevere(
+      data
+    ),
+    dollarsInFlight: dollarsInFlightSevere(data)
   };
   return impactEstimation;
 };
